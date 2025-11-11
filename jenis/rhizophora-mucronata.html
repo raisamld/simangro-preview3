@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rhizophora mucronata - SIMANGRO</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/logo-KKP.png"> <link rel="icon" type="image/png" sizes="16x16" href="../img/logo-KKP.png"> <link rel="apple-touch-icon" sizes="180x180" href="../img/logo-KKP.png">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0fdf4;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #10b981;
+      --secondary: #0ea5e9;
+      --accent: #16a34a;
+      --accent-light: #22c55e;
+      --accent-dark: #15803d;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --white: #ffffff;
+      --border: #d1fae5;
+      --shadow: 0 4px 16px rgba(22, 163, 74, 0.1);
+      --shadow-hover: 0 8px 32px rgba(22, 163, 74, 0.15);
+      --shadow-intense: 0 20px 40px rgba(22, 163, 74, 0.2);
+      --gradient-primary: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      --gradient-bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(22, 163, 74, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(22, 163, 74, 0.02) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid transparent;
+      border-image: var(--gradient-primary) 1;
+    }
+
+    /* ============ BURGER MENU ============ */
+    .burger-menu {
+      display: flex;
+      cursor: pointer;
+      background: rgba(15,23,42,0.04);
+      border: none;
+      padding: 8px;
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      transition: background-color var(--transition), transform var(--transition);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+    
+    .burger-menu:hover {
+      background: rgba(22, 163, 74, 0.1);
+      transform: scale(1.05);
+    }
+    
+    .burger-menu img {
+      width: 24px;
+      height: 24px;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    
+    .burger-menu img.menu-icon { display: block; }
+    
+    @media (prefers-color-scheme: dark) {
+      .burger-menu { background: rgba(255,255,255,0.04); }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25);
+      position: relative;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .logo:hover::before {
+      opacity: 0.1;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover img {
+      transform: scale(1.05);
+    }
+
+    .sitename {
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    /* ============ NAVIGATION ============ */
+    .nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 80%;
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      padding: 80px 24px 24px;
+      transition: right var(--transition);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav.active {
+      right: 0;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 25px;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: -1;
+    }
+
+    .nav a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .nav a:hover::before {
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .breadcrumb {
+      margin: 30px 0 20px 0;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    .breadcrumb a {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--gradient-card);
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .breadcrumb a:hover {
+      background: var(--accent);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .species-header {
+      text-align: center;
+      margin: 40px 0 50px 0;
+      position: relative;
+    }
+
+    .local-name-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--gradient-primary);
+      color: var(--white);
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-intense);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .species-title {
+      font-size: 4rem;
+      font-weight: 600;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      letter-spacing: -0.04em;
+      font-style: italic;
+      position: relative;
+    }
+
+    .species-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 2px;
+      background: var(--gradient-primary);
+    }
+
+    .species-intro {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+      text-align: justify;
+      font-weight: 400;
+    }
+
+    /* Image Gallery Section */
+    .identification-gallery {
+      margin: 60px 0;
+      text-align: center;
+    }
+
+    .image-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .showcase-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-intense);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .showcase-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 32px 64px rgba(22, 163, 74, 0.2);
+    }
+
+    .showcase-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .showcase-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .image-label {
+      position: relative;
+      background: var(--white);
+      padding: 18px 20px;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      border-top: 2px solid var(--border);
+    }
+
+    .image-credit {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .content-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      margin: 60px 0;
+    }
+
+    .section-divider {
+      height: 2px;
+      background: var(--gradient-primary);
+      margin: 40px 0;
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+
+    .morphology-section {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      margin: 40px 0;
+      box-shadow: var(--shadow-intense);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .morphology-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.03), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .morphology-section:hover::before {
+      left: 100%;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-heading::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .morphology-cards {
+      display: grid;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .morph-card {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .morph-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-primary);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .morph-card:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateX(8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .morph-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .morph-title {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .morph-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .morph-img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .morph-content {
+      color: var(--dark);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.05), rgba(34, 197, 94, 0.05));
+      padding: 20px 25px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      margin: 15px 0;
+      font-weight: 500;
+    }
+
+    .taxonomy-section {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      margin: 40px 0;
+      box-shadow: var(--shadow-intense);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .taxonomy-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.03), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .taxonomy-section:hover::before {
+      left: 100%;
+    }
+
+    .taxonomy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .taxonomy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .taxonomy-row:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateX(5px);
+      border-color: rgba(22, 163, 74, 0.2);
+      box-shadow: var(--shadow);
+    }
+
+    .taxonomy-label {
+      font-weight: 600;
+      color: var(--accent-dark);
+      font-size: 0.9rem;
+      text-transform: capitalize;
+      letter-spacing: 0.025em;
+    }
+
+    .taxonomy-value {
+      font-style: italic;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .habitat-section {
+      margin: 60px 0;
+    }
+
+    .habitat-content {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      text-align: justify;
+      position: relative;
+      padding: 40px;
+      background: var(--gradient-card);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(22, 163, 74, 0.1);
+      box-shadow: var(--shadow-intense);
+    }
+
+    .site-footer {
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(22,163,74,0.1);
+      padding: 24px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .site-footer .logo {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .site-footer .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .site-footer .logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .site-footer .copy {
+      opacity: 0.95;
+      display: inline-block;
+    }
+
+    .site-footer .copy .org {
+      display: block;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .site-footer .copy .copyright {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .species-header {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .identification-gallery {
+      animation: floatIn 1s ease-out 0.3s both;
+    }
+
+    .morphology-section {
+      animation: floatIn 0.8s ease-out 0.5s both;
+    }
+
+    .taxonomy-section {
+      animation: floatIn 0.8s ease-out 0.7s both;
+    }
+
+    .habitat-section {
+      animation: fadeInUp 0.8s ease-out 0.9s both;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .brand {
+        gap: 12px;
+      }
+
+      .sitename {
+        font-size: 1.4rem;
+      }
+
+      .nav {
+        gap: 4px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav a {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+      
+      .species-title {
+        font-size: 2.5rem;
+      }
+      
+      .image-showcase {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .taxonomy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .morphology-section,
+      .taxonomy-section,
+      .habitat-content {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .sitename {
+        display: none;
+      }
+
+      .nav {
+        gap: 8px;
+        width: auto;
+      }
+
+      .species-title {
+        font-size: 2rem;
+      }
+      
+      .section-heading {
+        font-size: 1.6rem;
+      }
+
+      .morphology-section,
+      .taxonomy-section,
+      .habitat-content {
+        padding: 24px 20px;
+      }
+
+      .local-name-badge {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      html, body { 
+        font-size: 16px; 
+        line-height: 1.6; 
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media print {
+      body::before {
+        display: none;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .breadcrumb, .header {
+        display: none;
+      }
+      
+      .showcase-item, .taxonomy-section, .morphology-section, .habitat-content {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        background: white;
+      }
+    }
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .lightbox-image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      background: #000;
+      cursor: zoom-in;
+      max-height: 80vh;
+    }
+
+    .lightbox-image-container.zoomed {
+      cursor: zoom-out;
+      overflow: auto;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 80vh;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-image-container.zoomed .lightbox-image {
+      max-width: none;
+      max-height: none;
+      width: 200%;
+      cursor: grab;
+    }
+
+    .lightbox-image-container.zoomed .lightbox-image:active {
+      cursor: grabbing;
+    }
+
+    .lightbox-caption {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px 30px;
+      border-radius: 12px;
+      color: var(--dark);
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .lightbox-caption-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent-dark);
+      margin-bottom: 8px;
+    }
+
+    .lightbox-caption-credit {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .lightbox-close:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-nav.prev {
+      left: 20px;
+    }
+
+    .lightbox-nav.next {
+      right: 20px;
+    }
+
+    .lightbox-zoom-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .lightbox-zoom-btn {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+    }
+
+    .lightbox-zoom-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .showcase-item {
+      cursor: pointer;
+    }
+
+    @media print {
+      body::before {
+        display: none;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .breadcrumb, .header {
+        display: none;
+      }
+      
+      .showcase-item, .taxonomy-section, .morphology-section, .habitat-content {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        background: white;
+      }
+
+      .lightbox {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-nav, .lightbox-close {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      .lightbox-zoom-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      .lightbox-content {
+        max-width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo-KKP.png" alt="Logo SIMANGRO"/>
+      </a>
+      <div class="sitename">SIMANGRO</div>
+    </div>
+  
+    <button class="burger-menu" aria-label="Toggle menu" aria-expanded="false">
+      <img src="../img/menu-dark.png" alt="Menu" class="menu-icon">
+    </button>
+  
+    <nav class="nav" aria-label="Menu utama">
+      <a href="../#about">Beranda</a>
+      <a href="index.html">Jenis Mangrove</a>
+      <a href="../peta sebaran.html">Peta Aksi Mangrove</a>
+      <a href="../quiz.html">Quiz</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">← Kembali</a>
+    </nav>
+
+    <header class="species-header">
+      <div class="local-name-badge">
+        Bangka itam, dongih korap, bakau hitam, bakau korap, bakau merah, jankar, lenggayong, belukap, lolaro
+      </div>
+      <h1 class="species-title">Rhizophora mucronata</h1>
+      <p class="species-intro">
+        Pohon dengan ketinggian mencapai 27 m, jarang melebihi 30 m. Batang memiliki diameter hingga 70 cm dengan kulit kayu
+        berwarna gelap hingga hitam dan terdapat celah horizontal. Akar tunjang dan akar udara yang tumbuh dari percabangan
+        bagian bawah.
+      </p>
+    </header>
+
+    <section class="identification-gallery">
+      <div class="image-showcase">
+        <div class="showcase-item">
+          <img src="../img/rhizophora-apiculata-daun.jpg" alt="Morfologi daun Rhizophora mucronata" onerror="this.style.opacity=0.6;this.alt='Dokumentasi daun tidak tersedia'"/>
+          <div class="image-label">
+            Daun
+            <span class="image-credit">&copy; Ron Yeo</span>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <img src="../img/rhizophora-apiculata-bunga.jpg" alt="Struktur bunga Rhizophora mucronata" onerror="this.style.opacity=0.6;this.alt='Dokumentasi bunga tidak tersedia'"/>
+          <div class="image-label">
+            Bunga
+            <span class="image-credit">&copy; Tropica Flora</span>
+          </div>
+        </div>
+        
+        <div class="showcase-item">
+          <img src="../img/rhizophora-apiculata-buah.jpg" alt="Morfologi buah Rhizophora mucronata" onerror="this.style.opacity=0.6;this.alt='Dokumentasi buah tidak tersedia'"/>
+          <div class="image-label">
+            Buah
+            <span class="image-credit">&copy; LeDocNono</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="morphology-section">
+      <h3 class="section-heading">Deskripsi Morfologi Detail</h3>
+      <div class="morphology-cards">
+        <div class="morph-card">
+          <div class="morph-title">
+            <div class="morph-icon"><img src="../img/daun.png" alt="Daun" class="morph-img"></div>
+            Daun
+          </div>
+          <div class="morph-content">
+            Daun berkulit. Gagang daun berwarna hijau, panjang 2,5-5,5 cm. Pinak daun terletak pada pangkal gagang daun berukuran
+            5,5-8,5 cm. Unit & Letak: sederhana & berlawanan. Bentuk: elips melebar hingga bulat memanjang. Ujung: meruncing.
+            Ukuran: 11-23 x 5-13 cm.
+          </div>
+        </div>
+
+        <div class="morph-card">
+          <div class="morph-title">
+            <div class="morph-icon"><img src="../img/bunga.png" alt="Bunga" class="morph-img"></div>
+            Bunga
+          </div>
+          <div class="morph-content">
+            Gagang kepala bunga seperti cagak, bersifat biseksual, masing-masing menempel pada gagang individu yang panjangnya 2,5-5
+            cm. Letak: di ketiak daun. Formasi: Kelompok (4-8 bunga per kelompok). Daun mahkota: 4;putih, ada rambut. 9 mm. Kelopak
+            bunga: 4; kuning pucat, panjangnya 13-19 mm. Benang sari: 8; tak bertangkai.
+          </div>
+        </div>
+
+        <div class="morph-card">
+          <div class="morph-title">
+            <div class="morph-icon"><img src="../img/buah.png" alt="Buah" class="morph-img"></div>
+            Buah
+          </div>
+          <div class="morph-content">
+            Buah lonjong/panjang hingga berbentuk telur berukuran 5-7 cm, berwarna hijaukecoklatan, seringkali kasar di bagian
+            pangkal, berbiji tunggal. Hipokotil silindris, kasar dan berbintil. Leher kotilodon kuning ketika matang. Ukuran:
+            Hipokotil: panjang 36- 70 cm dan diameter 2-3 cm.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="taxonomy-section">
+      <h3 class="section-heading">Klasifikasi Taksonomi</h3>
+      <div class="taxonomy-grid">
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Kingdom</span>
+          <span class="taxonomy-value">Plantae</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Phylum</span>
+          <span class="taxonomy-value">Streptophyta</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Class</span>
+          <span class="taxonomy-value">Equisetopsida</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Order</span>
+          <span class="taxonomy-value">Malpighiales</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Family</span>
+          <span class="taxonomy-value">Rhizophoraceae</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Genus</span>
+          <span class="taxonomy-value">Rhizophora</span>
+        </div>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">Species</span>
+          <span class="taxonomy-value">Rhizophora mucronata</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="habitat-section">
+      <h3 class="section-heading" style="text-align: center; margin-bottom: 40px;">Habitat & Sebaran Geografis</h3>
+      <div class="habitat-content">
+        Di areal yang sama dengan R.apiculata tetapi lebih toleran terhadap substrat yang lebih keras dan pasir. Pada umumnya
+        tumbuh dalam kelompok, dekat atau pada pematang sungai pasang surut dan di muara sungai, jarang sekali tumbuh pada
+        daerah yang jauh dari air pasang surut. Pertumbuhan optimal terjadi pada areal yang tergenang dalam, serta pada tanah
+        yang kaya akan humus. Merupakan salah satu jenis tumbuhan mangrove yang paling penting dan paling tersebar luas.
+        Perbungaan terjadi sepanjang tahun. Anakan seringkali dimakan oleh kepiting, sehingga menghambat pertumbuhan mereka.
+        Anakan yang telah dikeringkan dibawah naungan untuk beberapa hari akan lebih tahan terhadap gangguan kepiting. Hal
+        tersebut mungkin dikarenakan adanya akumulasi tanin dalam jaringan yang kemudian melindungi mereka. Spesiesnya dapat
+        ditemukan di Afrika Timur, Madagaskar, Mauritania, Asia tenggara, seluruh Malaysia dan Indonesia, Melanesia dan
+        Mikronesia. Dibawa dan ditanam di Hawaii.
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer" aria-label="Footer organisasi">
+    <div class="logo" aria-hidden="true"><img src="../img/logo-KKP.png" alt="Logo KKP"/></div>
+    <div class="copy">
+      <div class="org">Kementerian Kelautan dan Perikanan</div>
+      <div class="copyright">© Copyright 2025, Kementerian Kelautan dan Perikanan Republik Indonesia</div>
+    </div>
+  </footer>
+
+  <script>
+  // ============ BURGER MENU ============
+    (function() {
+      const burger = document.querySelector('.burger-menu');
+      const nav = document.querySelector('.nav');
+      const links = nav.querySelectorAll('a');
+      let isOpen = false;
+    
+      function toggle() {
+        isOpen = !isOpen;
+        burger.setAttribute('aria-expanded', isOpen);
+        nav.classList.toggle('active', isOpen);
+      }
+    
+      burger.addEventListener('click', toggle);
+    
+      document.addEventListener('click', (e) => {
+        if (isOpen && !nav.contains(e.target) && !burger.contains(e.target)) {
+          toggle();
+        }
+      });
+    
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) toggle();
+      });
+    
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggle();
+        });
+      });
+    
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && isOpen) toggle();
+      });
+    })();
+  </script>
+</body>
+</html>

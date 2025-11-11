@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jenis Mangrove - SIMANGRO</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/logo-KKP.png"> <link rel="icon" type="image/png" sizes="16x16" href="../img/logo-KKP.png"> <link rel="apple-touch-icon" sizes="180x180" href="../img/logo-KKP.png">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0fdf4;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #10b981;
+      --secondary: #0ea5e9;
+      --accent: #16a34a;
+      --accent-light: #22c55e;
+      --accent-dark: #15803d;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --white: #ffffff;
+      --border: #d1fae5;
+      --shadow: 0 4px 16px rgba(22, 163, 74, 0.1);
+      --shadow-hover: 0 8px 32px rgba(22, 163, 74, 0.15);
+      --shadow-intense: 0 20px 40px rgba(22, 163, 74, 0.2);
+      --gradient-primary: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      --gradient-bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(22, 163, 74, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(22, 163, 74, 0.02) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-intense);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid transparent;
+      border-image: var(--gradient-primary) 1;
+    }
+
+    /* ============ BURGER MENU ============ */
+    .burger-menu {
+      display: flex;
+      cursor: pointer;
+      background: rgba(15,23,42,0.04);
+      border: none;
+      padding: 8px;
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      transition: background-color var(--transition), transform var(--transition);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+
+    .burger-menu:hover {
+      background: rgba(22, 163, 74, 0.1);
+      transform: scale(1.05);
+    }
+
+    .burger-menu img {
+      width: 24px;
+      height: 24px;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+
+    .burger-menu img.menu-icon { display: block; }
+
+    @media (prefers-color-scheme: dark) {
+      .burger-menu { background: rgba(255,255,255,0.04); }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25);
+      position: relative;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .logo:hover::before {
+      opacity: 0.1;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover img {
+      transform: scale(1.05);
+    }
+
+    .sitename {
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    /* ============ NAVIGATION ============ */
+    .nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 80%;
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      padding: 80px 24px 24px;
+      transition: right var(--transition);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav.active {
+      right: 0;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 25px;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: -1;
+    }
+
+    .nav a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .nav a:hover::before {
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-intense);
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.05) 0%, transparent 70%);
+      animation: headerFloat 15s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes headerFloat {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+
+    .page-header h1 {
+      font-size: 2.4rem;
+      margin: 0 0 12px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 30px rgba(22,163,74,0.2);
+      animation: titleGlow 4s ease-in-out infinite;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 0 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 24px auto 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 2px solid var(--accent);
+      border-radius: 50px;
+      background: var(--bg);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      outline: none;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
+      text-align: center;
+      color: var(--dark);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-dark);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+      text-align: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      opacity: 0.5;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+    }
+
+    .search-icon img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: grayscale(1) brightness(0.6);
+      position: right;
+    }
+
+    .search-box input:focus + .search-icon {
+      opacity: 0.8;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .search-box input:focus + .search-icon img {
+      filter: grayscale(0) brightness(1);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+    .species-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .species-card {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .species-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.05), transparent);
+      transition: left 0.6s ease;
+      z-index: 1;
+    }
+
+    .species-card:hover::before {
+      left: 100%;
+    }
+
+    .species-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: var(--shadow-intense);
+    }
+
+    .card-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+      cursor: pointer;
+    }
+
+    .species-card:hover .card-image img {
+      transform: scale(1.1);
+    }
+
+    .card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, 
+        transparent 0%,
+        transparent 50%,
+        rgba(0,0,0,0.7) 100%
+      );
+      opacity: 1;
+    }
+
+    .image-credit {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      font-weight: 400;
+      z-index: 2;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 768px) {
+      .image-credit {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+      }
+    }
+
+    .card-content {
+      padding: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-content h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .card-content h3 a {
+      color: var(--dark);
+      text-decoration: none;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .card-content h3 a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+    }
+
+    .species-card:hover .card-content h3 a::after {
+      width: 100%;
+    }
+
+    .card-image img[style*="opacity"] {
+      filter: grayscale(1);
+      opacity: 0.3 !important;
+    }
+
+    .card-image::before {
+      content: '🌿';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .site-footer {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(22,163,74,0.1);
+      padding: 32px 24px;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .site-footer .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .site-footer .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .site-footer .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .site-footer .copy {
+      opacity: 0.95;
+    }
+
+    .site-footer .copy .org {
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .site-footer .copy .copyright {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .reveal-on-scroll { 
+      opacity: 0; 
+      transform: translateY(30px); 
+      transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); 
+      will-change: opacity, transform; 
+    }
+    .reveal-on-scroll.revealed { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .brand {
+        gap: 12px;
+      }
+
+      .sitename {
+        font-size: 1.2rem;
+      }
+
+      .nav {
+        gap: 4px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav a {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+
+      .page-header {
+        padding: 32px 24px;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .page-header p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .search-box input {
+        font-size: 0.95rem;
+        padding: 14px 45px 14px 18px;
+      }
+
+      .search-icon {
+        right: 16px;
+      }
+
+      .search-icon img {
+        width: 18px;
+        height: 18px;
+      }
+
+      .species-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card-content h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .sitename {
+        display: none;
+      }
+
+      .nav {
+        gap: 8px;
+        width: auto;
+      }
+
+      .page-header {
+        padding: 24px 20px;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .page-header p {
+        font-size: 0.95rem;
+      }
+
+      .search-box input {
+        font-size: 0.9rem;
+        padding: 12px 40px 12px 16px;
+      }
+
+      .search-icon {
+        right: 14px;
+      }
+
+      .search-icon img {
+        width: 16px;
+        height: 16px;
+      }
+
+      .species-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      html, body { 
+        font-size: 16px; 
+        line-height: 1.6; 
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media print {
+      body::before, .page-header::before {
+        display: none;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .species-card, .page-header {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo-KKP.png" alt="Logo SIMANGRO" />
+      </a>
+      <div class="sitename">SIMANGRO</div>
+    </div>
+
+    <button class="burger-menu" aria-label="Toggle menu" aria-expanded="false">
+      <img src="../img/menu-dark.png" alt="Menu" class="menu-icon">
+    </button>
+
+    <nav class="nav" aria-label="Menu utama">
+      <a href="../index.html">Beranda</a>
+      <a href="index.html">Jenis Mangrove</a>
+      <a href="../peta sebaran.html">Peta Aksi Mangrove</a>
+      <a href="../quiz.html">Quiz</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-header reveal-on-scroll">
+      <h1>Jenis Mangrove</h1>
+      <p>Pilih salah satu jenis untuk melihat ciri-ciri (daun, bunga, buah) dan deskripsi lengkap setiap spesies mangrove.</p>
+      
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cari spesies mangrove..." aria-label="Cari spesies mangrove">
+        <span class="search-icon">
+          <img src="../img/search.png" alt="Search icon"/>
+        </span>
+      </div>
+    </div>
+
+    <div class="species-grid" id="speciesGrid"></div>
+    <div class="no-results" id="noResults">
+      <p>Tidak ada spesies yang ditemukan</p>
+    </div>
+  </div>
+
+  <footer class="site-footer" aria-label="Footer organisasi">
+    <div class="footer-content">
+      <div class="logo" aria-hidden="true">
+        <img src="../img/logo-KKP.png" alt="Logo KKP"/>
+      </div>
+      <div class="copy">
+        <div class="org">Kementerian Kelautan dan Perikanan</div>
+        <div class="copyright">© Copyright 2025, Kementerian Kelautan dan Perikanan Republik Indonesia</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mangroveSpecies = [
+      {
+        name: 'Acanthus ebracteatus',
+        file: 'acanthus-ebracteatus.html',
+        image: '../img/acanthus-ebracteatus.jpeg',
+        imageCredit: '© BioM_Akekachoke.B, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Acanthus ilicifolius',
+        file: 'acanthus-ilicifolius.html',
+        image: '../img/acanthus-ilicifolius.jpg',
+        imageCredit: '© M. Fagg, CC BY 3.0, iNaturalist'
+      },
+      {
+        name: 'Acrostichum aureum',
+        file: 'acrostichum-aureum.html',
+        image: '../img/acrostichum-aureum.jpg',
+        imageCredit: '© Braden J. Judson, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Acrosticum speciosum',
+        file: 'acrosticum-speciosum.html',
+        image: '../img/acrosticum-speciosum.jpg',
+        imageCredit: '© Ian Cowan, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Aegialitis annulata',
+        file: 'aegialitis-annulata.html',
+        image: '../img/aegialitis-annulata.jpg',
+        imageCredit: '© Malcolm Tattersall, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Aegiceras corniculatum',
+        file: 'aegiceras-corniculatum.html',
+        image: '../img/aegiceras-corniculatum.jpg',
+        imageCredit: '© J Grant, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Aegiceras floridum',
+        file: 'aegiceras-floridum.html',
+        image: '../img/aegiceras-floridum.jpg',
+        imageCredit: '© Abner Bucol, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Avicennia alba',
+        file: 'avicennia-alba.html',
+        image: '../img/avicennia-alba.jpg',
+        imageCredit: '© memo_1, CC BY-NC, iNaturalist'
+      },
+      // {
+      //  name: 'Avicennia eucalyptifolia',
+      //  file: 'avicennia-eucalyptifolia.html',
+      //  image: '../img/avicennia-eucalyptifolia.jpg',
+      //  imageCredit: '© John Yong'
+      // },
+      // {
+      //   name: 'Avicennia lanata',
+      //   file: 'avicennia-lanata.html',
+      //   image: '../img/avicennia-lanata.jpg',
+      //   imageCredit: '© Wetlands International'
+      // },
+      {
+        name: 'Avicennia marina',
+        file: 'avicennia-marina.html',
+        image: '../img/avicennia-marina.jpg',
+        imageCredit: '© Dean Beaver, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Avicennia officinalis',
+        file: 'avicennia-officinalis.html',
+        image: '../img/avicennia-officinalis.jpg',
+        imageCredit: '© pbsingh, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Barringtonia asiatica',
+        file: 'barringtonia-asiatica.html',
+        image: '../img/barringtonia-asiatica.jpg',
+        imageCredit: '© vgm, CC BY-NC, iNaturalist'
+      },  
+      {
+        name: 'Bruguiera cylindrica',
+        file: 'bruguiera-cylindrica.html',
+        image: '../img/bruguiera-cylindrica.jpg',
+        imageCredit: '© Carrie Seltzer, CC BY, iNaturalist'
+      },  
+      {
+        name: 'Bruguiera gymnorrhiza',
+        file: 'bruguiera-gymnorrhiza.html',
+        image: '../img/bruguiera-gymnorrhiza.jpg',
+        imageCredit: '© Ryan Yue Wah Chan, CC BY-NC, iNaturalist'
+      },  
+      {
+        name: 'Bruguiera parviflora',
+        file: 'bruguiera-parviflora.html',
+        image: '../img/bruguiera-parviflora.jpg',
+        imageCredit: '© Stephen Csurhes, CC BY-NC, iNaturalist'
+      },  
+      {
+        name: 'Bruguiera sexangula',
+        file: 'bruguiera-sexangula.html',
+        image: '../img/bruguiera-sexangula.jpg',
+        imageCredit: '© 靛电鳗鳗子, CC BY-NC, iNaturalist'
+      },  
+      {
+        name: 'Calophyllum inophyllum',
+        file: 'calophyllum-inophyllum.html',
+        image: '../img/calophyllum-inophyllum.jpg',
+        imageCredit: '© Ken Harris EntSocVic, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Calotropis gigantea',
+        file: 'calotropis-gigantea.html',
+        image: '../img/calotropis-gigantea.jpeg',
+        imageCredit: '© Arindam Bhuina, CC BY-NC-SA, iNaturalist'
+      },
+      {
+        name: 'Cerbera manghas',
+        file: 'cerbera-manghas.html',
+        image: '../img/cerbera-manghas.jpeg',
+        imageCredit: '© Lijin Huang (紫楝), CC BY-NC, iNaturalist'
+      },
+      // {
+      //   name: 'Ceriops decandra',
+      //   file: 'ceriops-decandra.html',
+      //   image: '../img/ceriops-decandra.jpg',
+      //   imageCredit: '© Lorem'
+      // },
+      {
+        name: 'Nypa fruticans',
+        file: 'nypa-fruticans.html',
+        image: '../img/nypa-fruticans.jpg',
+        imageCredit: '© Gunn Go Green, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Rhizophora apiculata',
+        file: 'rhizophora-apiculata.html',
+        image: '../img/rhizophora-apiculata.jpg',
+        imageCredit: '© Forest & Kim Starr'
+      },
+      // {
+      //   name: 'Rhizophora mucronata',
+      //   file: 'rhizophora-mucronata.html',
+      //   image: '../img/rhizophora-mucronata.jpg',
+      //   imageCredit: '© Riza Salman'
+      // },
+      {
+        name: 'Rhizophora stylosa',
+        file: 'rhizophora-stylosa.html',
+        image: '../img/rhizophora-stylosa.jpg',
+        imageCredit: '© J Grant, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Sonneratia alba',
+        file: 'sonneratia-alba.html',
+        image: '../img/sonneratia-alba.jpg',
+        imageCredit: '© gillbsydney, CC BY-NC, iNaturalist'
+      },
+      {
+        name: 'Sonneratia caseolaris',
+        file: 'sonneratia-caseolaris.html',
+        image: '../img/sonneratia-caseolaris.jpg',
+        imageCredit: '© Nguyen-Khanh-Trinh Tram, CC BY, iNaturalist'
+      },
+      {
+        name: 'Volkameria inermis',
+        file: 'volkameria-inermis.html',
+        image: '../img/volkameria-inermis.jpeg',
+        imageCredit: ''
+      },
+      {
+        name: 'Xylocarpus granatum',
+        file: 'xylocarpus-granatum.html',
+        image: '../img/xylocarpus-granatum.jpg',
+        imageCredit: '© Penny Taylor, CC BY-NC, iNaturalist'
+      }
+    ];
+
+    const grid = document.getElementById('speciesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const noResults = document.getElementById('noResults');
+
+    function displaySpecies(speciesToShow) {
+      grid.innerHTML = '';
+      
+      if (speciesToShow.length === 0) {
+        noResults.classList.add('show');
+        return;
+      }
+      
+      noResults.classList.remove('show');
+      
+      speciesToShow.forEach((sp, index) => {
+        const card = document.createElement('div');
+        card.className = 'species-card reveal-on-scroll';
+        
+        card.innerHTML = `
+          <div class="card-image">
+            <img src="${sp.image}" alt="${sp.name}" 
+                 onerror="this.style.opacity=0.3;this.alt='Gambar tidak tersedia'"
+                 onclick="navigateToSpecies('${sp.file}'); event.stopPropagation();"
+                 role="button"
+                 tabindex="0">
+            <div class="image-credit">${sp.imageCredit}</div>
+          </div>
+          <div class="card-content">
+            <h3><a href="${sp.file}" onclick="event.stopPropagation();">${sp.name}</a></h3>
+          </div>
+        `;
+        
+        card.onclick = () => navigateToSpecies(sp.file);
+        grid.appendChild(card);
+        
+        setTimeout(() => {
+          card.classList.add('revealed');
+        }, index * 50);
+      });
+    }
+
+    function navigateToSpecies(file) {
+      window.location.href = file;
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      
+      if (searchTerm === '') {
+        displaySpecies(mangroveSpecies);
+        return;
+      }
+      
+      const filtered = mangroveSpecies.filter(sp => {
+        const words = sp.name.toLowerCase().split(' ');
+        return words.some(word => word.startsWith(searchTerm));
+      });
+      
+      displaySpecies(filtered);
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        searchInput.blur();
+      }
+    });
+
+    displaySpecies(mangroveSpecies);
+  </script>
+
+  <script>
+    (function(){
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal-on-scroll').forEach((el, index) => {
+          setTimeout(() => el.classList.add('revealed'), index * 100);
+        });
+        return;
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const allCards = document.querySelectorAll('.species-card');
+            const cardIndex = Array.from(allCards).indexOf(entry.target);
+            const delay = entry.target.classList.contains('species-card') ? cardIndex * 100 : 0;
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, delay);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { 
+        root: null, 
+        rootMargin: '0px 0px -10% 0px', 
+        threshold: 0.15 
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => io.observe(el));
+      }, 100);
+    })();
+  </script>
+
+  <script>
+    // ============ BURGER MENU ============
+    (function() {
+      const burger = document.querySelector('.burger-menu');
+      const nav = document.querySelector('.nav');
+      const links = nav.querySelectorAll('a');
+      let isOpen = false;
+
+      function toggle() {
+        isOpen = !isOpen;
+        burger.setAttribute('aria-expanded', isOpen);
+        nav.classList.toggle('active', isOpen);
+      }
+
+      burger.addEventListener('click', toggle);
+
+      document.addEventListener('click', (e) => {
+        if (isOpen && !nav.contains(e.target) && !burger.contains(e.target)) {
+          toggle();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) toggle();
+      });
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggle();
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && isOpen) toggle();
+      });
+    })();
+  </script>
+</body>
+</html>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
+        console.log('ServiceWorker registered:', reg);
+      }).catch(function(err) {
+        console.warn('ServiceWorker registration failed:', err);
+      });
+    });
+  }
+</script>

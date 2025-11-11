@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/index.php -->
+<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIMANGRO - Sistem Informasi Mangrove</title>
+  <!-- Plus Jakarta Sans from Google Fonts -->
+  <link href="./SIMANGRO - Sistem Informasi Mangrove_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0fdf4;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #10b981;
+      --secondary: #0ea5e9;
+      --accent: #16a34a;
+      --accent-light: #22c55e;
+      --accent-dark: #15803d;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --white: #ffffff;
+      --border: #d1fae5;
+      --shadow: 0 4px 16px rgba(22, 163, 74, 0.1);
+      --shadow-hover: 0 8px 32px rgba(22, 163, 74, 0.15);
+      --shadow-intense: 0 20px 40px rgba(22, 163, 74, 0.2);
+      --gradient-primary: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      --gradient-bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--dark);
+      font-size: 18px;
+      line-height: 1.75;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Enhanced animated background with floating elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(22, 163, 74, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(22, 163, 74, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 60% 70%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      animation: float 25s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    /* Additional floating elements */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(22, 163, 74, 0.1), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(34, 197, 94, 0.08), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(22, 163, 74, 0.06), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(16, 185, 129, 0.04), transparent);
+      background-repeat: repeat;
+      background-size: 150px 100px, 200px 120px, 180px 90px, 160px 110px;
+      animation: sparkle 30s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+      25% { transform: translate(30px, -30px) rotate(90deg) scale(1.05); }
+      50% { transform: translate(-20px, 20px) rotate(180deg) scale(0.95); }
+      75% { transform: translate(-30px, -10px) rotate(270deg) scale(1.02); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-10px) translateX(5px); }
+    }
+
+    /* Header - enhanced modern design */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid transparent;
+      border-image: var(--gradient-primary) 1;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25);
+      position: relative;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .logo:hover::before {
+      opacity: 0.1;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover img {
+      transform: scale(1.05);
+    }
+
+    .sitename {
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 25px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .nav a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero Section with enhanced modern background */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+      background: 
+        linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(236, 253, 245, 0.8) 50%, rgba(209, 250, 229, 0.7) 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="mangrove-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="25" r="2" fill="%2316a34a" opacity="0.1"/><circle cx="20" cy="75" r="1.5" fill="%2322c55e" opacity="0.08"/><path d="M30,30 Q50,10 70,30 Q50,50 30,30" fill="%2310b981" opacity="0.05"/></pattern></defs><rect width="100%" height="100%" fill="url(%23mangrove-pattern)"/></svg>');
+      background-size: 200px 200px, cover;
+      background-attachment: fixed;
+    }
+
+    /* Floating decorative elements */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(22,163,74,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatDecorative1 20s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 15%;
+      right: 8%;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatDecorative2 25s ease-in-out infinite reverse;
+      z-index: 1;
+    }
+
+    @keyframes floatDecorative1 {
+      0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.3; }
+      33% { transform: translate(20px, -20px) scale(1.1); opacity: 0.5; }
+      66% { transform: translate(-10px, 10px) scale(0.9); opacity: 0.4; }
+    }
+
+    @keyframes floatDecorative2 {
+      0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.4; }
+      50% { transform: translate(-15px, -15px) scale(1.2); opacity: 0.6; }
+    }
+
+    /* Background Slideshow */
+    .hero-bg-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .hero-slide.active {
+      opacity: 0.2;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: blur(1px) brightness(1.1);
+    }
+
+    /* Enhanced Hero Content */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      padding: 48px 40px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(25px);
+      border-radius: 32px;
+      box-shadow: 
+        0 32px 64px rgba(22, 163, 74, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255,255,255,0.5);
+      margin: 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--gradient-primary);
+      border-radius: 34px;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .hero-content::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.03) 0%, transparent 70%);
+      animation: heroFloat 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(22,163,74,0.2);
+      animation: titleGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.1); }
+    }
+
+    .lead {
+      color: var(--dark);
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: var(--accent);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      text-shadow: 0 2px 8px rgba(22,163,74,0.3);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    /* Enhanced slide indicators */
+    .slide-indicators {
+      position: absolute;
+      bottom: 100px;
+      right: 30px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22,163,74,0.2);
+    }
+
+    .slide-dot.active {
+      background: var(--accent);
+      transform: scale(1.4);
+      box-shadow: 0 4px 15px rgba(22,163,74,0.4);
+    }
+
+    /* Reveal on scroll helper */
+    .reveal-on-scroll { 
+      opacity: 0; 
+      transform: translateY(30px); 
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+      will-change: opacity, transform; 
+    }
+    .reveal-on-scroll.revealed { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+
+    /* Enhanced Main Content */
+    main {
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+    }
+
+    .card {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 
+        var(--shadow-intense),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      text-align: center;
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.05), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 32px 60px rgba(22, 163, 74, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .card h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+      position: relative;
+    }
+
+    .card h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* Enhanced Feature grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 720px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-item {
+      background: linear-gradient(145deg, rgba(255,255,255,0.85), rgba(22,163,74,0.03));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(22,163,74,0.15);
+      padding: 24px;
+      border-radius: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.05) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .feature-item:hover::before {
+      opacity: 1;
+    }
+
+    .feature-item .icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(22,163,74,0.1), rgba(22,163,74,0.15));
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: 0 4px 15px rgba(22,163,74,0.2);
+    }
+
+    /* Icon styling with enhanced hover effects */
+    .icon-wave img, .icon-fish img, .icon-carbon img, .icon-economy img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .icon-wave { background-image: url('img/wave-dark.png'); background-repeat:no-repeat; background-position:center; background-size:contain; }
+    .feature-item:hover .icon-wave { background-image: url('img/wave-light.png'); }
+    .icon-fish { background-image: url('img/fish-dark.png'); background-repeat:no-repeat; background-position:center; background-size:contain; }
+    .feature-item:hover .icon-fish { background-image: url('img/fish-light.png'); }
+    .icon-carbon { background-image: url('img/carbon-dark.png'); background-repeat:no-repeat; background-position:center; background-size:contain; }
+    .feature-item:hover .icon-carbon { background-image: url('img/carbon-light.png'); }
+    .icon-economy { background-image: url('img/economy-dark.png'); background-repeat:no-repeat; background-position:center; background-size:contain; }
+    .feature-item:hover .icon-economy { background-image: url('img/economy-light.png'); }
+
+    .feature-item .text {
+      color: var(--dark);
+      font-weight: none;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .feature-item .text strong {
+      font-weight: 700;
+      color: var(--accent-dark);
+      font-size: 1.1rem;
+    }
+
+    .feature-item .text p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(22, 163, 74, 0.15);
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(22,163,74,0.08));
+      border-color: rgba(22,163,74,0.25);
+    }
+
+    .feature-item:hover .icon {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
+    }
+
+    /* New CTA Section */
+    .cta-section {
+      background: var(--accent);
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin: 60px 0 0;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      animation: floatCTA 20s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="80" r="1.5" fill="white" opacity="0.08"/><circle cx="60" cy="40" r="1" fill="white" opacity="0.06"/></svg>');
+      background-size: 100px 100px;
+      z-index: 1;
+    }
+
+    @keyframes floatCTA {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      50% { transform: translate(20px, -20px) rotate(180deg); }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 24px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      line-height: 1.2;
+    }
+
+    .cta-section p {
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 40px;
+      line-height: 1.7;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(20px);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.5);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    }
+
+    .cta-button-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover .cta-button-icon {
+      transform: translateX(4px);
+    }
+
+    /* Enhanced Footer */
+    .site-footer{
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(22,163,74,0.15);
+      padding: 32px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+      text-align: center;
+      position: relative;
+    }
+
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+    }
+
+    .site-footer .logo{
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .site-footer .logo:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .site-footer .logo img{
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .site-footer .copy{
+      opacity: 0.95;
+      display: inline-block;
+    }
+
+    .site-footer .copy .org{
+      display: block;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .site-footer .copy .copyright{
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* Responsive Enhancements */
+    @media (max-width: 768px) {
+      .header {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .brand {
+        gap: 12px;
+      }
+
+      .sitename {
+        font-size: 1.4rem;
+      }
+
+      .nav {
+        gap: 4px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav a {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+      }
+
+      .hero-content {
+        padding: 32px 24px;
+        margin: 0 16px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .lead {
+        font-size: 1.05rem;
+      }
+
+      .scroll-indicator {
+        bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .slide-indicators {
+        bottom: 60px;
+        right: 20px;
+      }
+
+      main {
+        padding: 24px 16px;
+      }
+
+      .card {
+        padding: 32px 24px;
+        max-width: none;
+      }
+
+      .card h2 {
+        font-size: 2rem;
+      }
+
+      .features-grid {
+        gap: 20px;
+      }
+
+      .feature-item {
+        padding: 20px;
+      }
+
+      .cta-section {
+        padding: 60px 24px;
+        margin: 40px 0 0;
+      }
+
+      .cta-section h2 {
+        font-size: 2.2rem;
+      }
+
+      .cta-section p {
+        font-size: 1.1rem;
+      }
+
+      .cta-button {
+        padding: 16px 28px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .sitename {
+        display: none;
+      }
+
+      .nav {
+        gap: 8px;
+        width: auto;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-content {
+        padding: 24px 20px;
+        margin: 0 12px;
+      }
+
+      .scroll-indicator {
+        bottom: 15px;
+        font-size: 1.2rem;
+      }
+
+      .slide-indicators {
+        bottom: 50px;
+        right: 15px;
+      }
+
+      html, body { 
+        font-size: 16px; 
+        line-height: 1.6; 
+      }
+
+      .card {
+        padding: 24px 20px;
+      }
+
+      .features-grid {
+        gap: 16px;
+      }
+
+      .feature-item {
+        padding: 18px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .feature-item .icon {
+        align-self: center;
+      }
+
+      .feature-item .text {
+        text-align: center;
+      }
+
+      .cta-section {
+        padding: 50px 20px;
+      }
+
+      .cta-section h2 {
+        font-size: 2rem;
+      }
+
+      .cta-section p {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .hero-bg-slideshow, .nav, body::before, body::after, .cta-section {
+        display: none;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .card, .hero-content {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <a href="http://localhost:8000/buku_saku/index.php" class="logo">
+        <img src="./SIMANGRO - Sistem Informasi Mangrove_files/logo-KKP.png" alt="Logo SIMANGRO">
+      </a>
+      <div class="sitename">SIMANGRO</div>
+    </div>
+
+    <nav class="nav" aria-label="Menu utama">
+      <a href="http://localhost:8000/index.php#about">Beranda</a>
+      <a href="http://localhost:8000/jenis/index.php">Jenis Mangrove</a>
+    </nav>
+  </header>
+
+  <!-- Hero section with enhanced background slideshow -->
+  <section class="hero">
+    <!-- Background Slideshow -->
+    <div class="hero-bg-slideshow">
+      <div class="hero-slide">
+        <img src="./SIMANGRO - Sistem Informasi Mangrove_files/mangrove.jpg" alt="Ekosistem mangrove dengan akar prop yang khas">
+      </div>
+      <div class="hero-slide active">
+        <img src="./SIMANGRO - Sistem Informasi Mangrove_files/mangrove2.jpg" alt="Hutan mangrove di pesisir Indonesia">
+      </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content reveal-on-scroll revealed">
+      <h1>SIMANGRO</h1>
+      <p class="lead">
+        SIMANGRO (Sistem Informasi Mangrove) adalah platform digital yang dikembangkan sebagai media informasi dan identifikasi jenis mangrove. 
+        Sistem ini dirancang untuk mendukung kegiatan survei dan penelitian dengan menyediakan deskripsi, ciri morfologi, serta informasi penting mengenai berbagai spesies mangrove. 
+        Dengan SIMANGRO, pengguna dapat lebih mudah mengenali dan membandingkan jenis mangrove yang ditemui di lapangan, sehingga dapat menunjang pengambilan data secara cepat, tepat, dan terstandar.
+      </p>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicators">
+      <div class="slide-dot"></div>
+      <div class="slide-dot active"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">↓</div>
+  </section>
+
+  <main>
+    <!-- Sekilas Tentang Mangrove -->
+    <section class="card reveal-on-scroll revealed" aria-labelledby="sekilas">
+      <h2 id="sekilas">Sekilas Tentang Mangrove</h2>
+      <p>
+        Mangrove merupakan ekosistem hutan yang tumbuh di daerah pesisir tropis dan subtropis. Mangrove memiliki kemampuan unik untuk hidup di perairan payau dengan kondisi tanah berlumpur, pasang surut, dan kadar garam tinggi. Indonesia memiliki keanekaragaman mangrove terbesar di dunia dengan lebih dari 200 jenis tumbuhan.
+      </p>
+    </section>
+
+    <section class="card reveal-on-scroll" aria-labelledby="fungsi">
+      <h2>Fungsi dan Peran Mangrove</h2>
+      <div class="features-grid">
+        <div class="feature-item reveal-on-scroll">
+          <div class="icon icon-wave" aria-hidden="true">
+            <img src="./SIMANGRO - Sistem Informasi Mangrove_files/wave-dark.png" data-dark="img/wave-dark.png" data-light="img/wave-light.png" alt="Ikon gelombang - penahan abrasi">
+          </div>
+          <div class="text"><strong>Penahan Abrasi</strong>
+            <p>Akar mangrove mampu menahan gelombang dan mencegah erosi pantai.</p>
+          </div>
+        </div>
+
+        <div class="feature-item reveal-on-scroll">
+          <div class="icon icon-fish" aria-hidden="true">
+            <img src="./SIMANGRO - Sistem Informasi Mangrove_files/fish-dark.png" data-dark="img/fish-dark.png" data-light="img/fish-light.png" alt="Ikon ikan - habitat biota">
+          </div>
+          <div class="text"><strong>Habitat Biota</strong> 
+            <p>Menjadi tempat hidup, pemijahan, dan mencari makan bagi ikan, udang, dan kepiting.</p>
+          </div>
+        </div>
+
+        <div class="feature-item reveal-on-scroll">
+          <div class="icon icon-carbon" aria-hidden="true">
+            <img src="./SIMANGRO - Sistem Informasi Mangrove_files/carbon-dark.png" data-dark="img/carbon-dark.png" data-light="img/carbon-light.png" alt="Ikon karbon - penyerap karbon">
+          </div>
+          <div class="text"><strong>Penyerap Karbon</strong>
+            <p>Menyimpan karbon biru dalam jumlah besar sehingga membantu mitigasi perubahan iklim.</p>
+          </div>
+        </div>
+
+        <div class="feature-item reveal-on-scroll">
+          <div class="icon icon-economy" aria-hidden="true">
+            <img src="./SIMANGRO - Sistem Informasi Mangrove_files/economy-dark.png" data-dark="img/economy-dark.png" data-light="img/economy-light.png" alt="Ikon ekonomi - sumber ekonomi">
+          </div>
+          <div class="text"><strong>Sumber Ekonomi</strong>
+            <p>Memberikan manfaat bagi masyarakat seperti kayu bakau, madu, hingga ekowisata.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- New CTA Section -->
+  <section class="cta-section reveal-on-scroll">
+    <div class="cta-content">
+      <h2>Jelajahi Keanekaragaman Mangrove</h2>
+      <p>
+        Temukan berbagai jenis mangrove Indonesia dengan informasi lengkap mulai dari ciri morfologi, habitat, hingga manfaatnya. 
+        Pelajari keunikan setiap spesies dan tingkatkan pengetahuan Anda tentang ekosistem pesisir yang menakjubkan ini.
+      </p>
+      <a href="http://localhost:8000/jenis/index.php" class="cta-button">
+        <span>Mulai Jelajahi</span>
+        <span class="cta-button-icon">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer" aria-label="Footer organisasi">
+    <div class="logo" aria-hidden="true"><img src="./SIMANGRO - Sistem Informasi Mangrove_files/logo-KKP.png" alt="Logo KKP"></div>
+    <div class="copy">
+      <div class="org">Kementerian Kelautan dan Perikanan</div>
+      <div class="copyright">© Copyright 2025, Kementerian Kelautan dan Perikanan Republik Indonesia</div>
+    </div>
+  </footer>
+
+  <script>
+    // Enhanced hero slideshow with automatic transition
+    (function() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.slide-dot');
+      let currentSlide = 0;
+      let slideTimer;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+      }
+
+      function startSlideshow() {
+        slideTimer = setInterval(nextSlide, 6000);
+      }
+
+      function stopSlideshow() {
+        clearInterval(slideTimer);
+      }
+
+      // Add click handlers to dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          showSlide(index);
+          stopSlideshow();
+          startSlideshow(); // Restart timer
+        });
+      });
+
+      // Pause on hero hover
+      const hero = document.querySelector('.hero');
+      hero.addEventListener('mouseenter', stopSlideshow);
+      hero.addEventListener('mouseleave', startSlideshow);
+
+      // Initialize
+      startSlideshow();
+    })();
+  </script>
+
+  <script>
+    // Enhanced icon hover/focus swap with smooth transitions
+    (function(){
+      function setSrc(img, toLight){
+        if (!img) return;
+        const dark = img.getAttribute('data-dark');
+        const light = img.getAttribute('data-light');
+        if (!dark || !light) return;
+        img.style.transition = 'opacity 0.3s ease';
+        img.src = toLight ? light : dark;
+      }
+
+      // For each icon image, attach enhanced interaction handlers
+      document.querySelectorAll('.feature-item .icon img').forEach(img => {
+        const wrapper = img.closest('.feature-item');
+        
+        // Enhanced pointer interactions
+        wrapper.addEventListener('pointerenter', () => {
+          setSrc(img, true);
+          wrapper.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        wrapper.addEventListener('pointerleave', () => {
+          setSrc(img, false);
+          wrapper.style.transform = '';
+        });
+
+        // Enhanced keyboard focus
+        wrapper.addEventListener('focusin', () => setSrc(img, true));
+        wrapper.addEventListener('focusout', () => setSrc(img, false));
+
+        // Enhanced touch support with haptic feedback simulation
+        let touchToggled = false;
+        wrapper.addEventListener('touchstart', (ev) => {
+          touchToggled = !touchToggled;
+          setSrc(img, touchToggled);
+          // Add subtle scale animation for touch feedback
+          wrapper.style.transform = touchToggled ? 'scale(0.98)' : '';
+          setTimeout(() => {
+            if (touchToggled) wrapper.style.transform = 'translateY(-8px) scale(1.02)';
+          }, 100);
+        }, { passive: true });
+      });
+    })();
+  </script>
+
+  <script>
+    // Enhanced reveal-on-scroll with staggered animations
+    (function(){
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: reveal all with staggered delay
+        document.querySelectorAll('.reveal-on-scroll').forEach((el, index) => {
+          setTimeout(() => el.classList.add('revealed'), index * 100);
+        });
+        return;
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add staggered delay for feature items
+            const delay = entry.target.classList.contains('feature-item') ? index * 150 : 0;
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, delay);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { 
+        root: null, 
+        rootMargin: '0px 0px -10% 0px', 
+        threshold: 0.15 
+      });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => io.observe(el));
+    })();
+  </script>
+
+  <script>
+    // Add parallax effect to hero section
+    (function() {
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+
+      function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.3;
+        hero.style.transform = `translateY(${rate}px)`;
+      }
+
+      // Throttled scroll handler for better performance
+      let ticking = false;
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', () => {
+        requestTick();
+        ticking = false;
+      });
+    })();
+  </script>
+
+  <script>
+    // Add smooth scroll behavior for internal links
+    (function() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Add smooth scroll for scroll indicator
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+          const mainContent = document.querySelector('main');
+          if (mainContent) {
+            mainContent.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    // Enhanced CTA button interaction
+    (function() {
+      const ctaButton = document.querySelector('.cta-button');
+      if (!ctaButton) return;
+
+      ctaButton.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-4px) scale(1.05)';
+      });
+
+      ctaButton.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+      });
+
+      // Add ripple effect on click
+      ctaButton.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    })();
+  </script>
+
+  <style>
+    /* Ripple effect for CTA button */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+      transform: scale(0);
+      animation: ripple-animation 0.6s ease-out;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</body></html>

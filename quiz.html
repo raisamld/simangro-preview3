@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Mangrove - SIMANGRO</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/logo-KKP.png"> <link rel="icon" type="image/png" sizes="16x16" href="img/logo-KKP.png"> <link rel="apple-touch-icon" sizes="180x180" href="img/logo-KKP.png">
+  <!-- Plus Jakarta Sans from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0fdf4;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #10b981;
+      --secondary: #0ea5e9;
+      --accent: #16a34a;
+      --accent-light: #22c55e;
+      --accent-dark: #15803d;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --white: #ffffff;
+      --border: #d1fae5;
+      --shadow: 0 4px 16px rgba(22, 163, 74, 0.1);
+      --shadow-hover: 0 8px 32px rgba(22, 163, 74, 0.15);
+      --shadow-intense: 0 20px 40px rgba(22, 163, 74, 0.2);
+      --gradient-primary: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      --gradient-bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      --error: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Enhanced animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(22, 163, 74, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(22, 163, 74, 0.04) 0%, transparent 50%);
+      animation: float 25s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(22, 163, 74, 0.05), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(34, 197, 94, 0.03), transparent);
+      background-repeat: repeat;
+      background-size: 150px 100px, 180px 90px;
+      animation: sparkle 30s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-10px) translateX(5px); }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid transparent;
+      border-image: var(--gradient-primary) 1;
+    }
+
+    /* Burger Menu */
+    /* ============ BURGER MENU ============ */
+    .burger-menu {
+      display: flex;
+      cursor: pointer;
+      background: rgba(15,23,42,0.04);
+      border: none;
+      padding: 8px;
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      transition: background-color var(--transition), transform var(--transition);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+
+    .burger-menu:hover {
+      background: rgba(22, 163, 74, 0.1);
+      transform: scale(1.05);
+    }
+
+    .burger-menu img {
+      width: 24px;
+      height: 24px;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+
+    .burger-menu img.menu-icon { display: block; }
+
+    @media (prefers-color-scheme: dark) {
+      .burger-menu { background: rgba(255,255,255,0.04); }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25);
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sitename {
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    /* ============ NAVIGATION ============ */
+    .nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 80%;
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      padding: 80px 24px 24px;
+      transition: right var(--transition);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav.active {
+      right: 0;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 25px;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: -1;
+    }
+
+    .nav a:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .nav a:hover::before {
+      opacity: 1;
+    }
+
+    /* Quiz Container */
+    .quiz-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Quiz Header */
+    .quiz-header {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-intense);
+      text-align: center;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.03) 0%, transparent 70%);
+      animation: headerFloat 15s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes headerFloat {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+
+    .quiz-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    .quiz-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      background: rgba(255,255,255,0.5);
+      height: 12px;
+      border-radius: 50px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: inset 0 2px 8px rgba(22,163,74,0.1);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--gradient-primary);
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(22,163,74,0.3);
+    }
+
+    .progress-text {
+      color: var(--accent-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-intense);
+      border: 1px solid rgba(255,255,255,0.3);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .quiz-card.hidden {
+      display: none;
+    }
+
+    .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.05), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .quiz-card:hover::before {
+      left: 100%;
+    }
+
+    .question-number {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* Answer Options */
+    .options-container {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .option {
+      background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+      border: 2px solid rgba(22,163,74,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22,163,74,0.1), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .option:hover::before {
+      left: 100%;
+    }
+
+    .option:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(22,163,74,0.15);
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(22,163,74,0.05));
+    }
+
+    .option.selected {
+      border-color: var(--accent);
+      background: linear-gradient(145deg, rgba(22,163,74,0.1), rgba(22,163,74,0.05));
+      transform: scale(1.02);
+    }
+
+    .option.correct {
+      border-color: var(--success);
+      background: linear-gradient(145deg, rgba(34,197,94,0.15), rgba(34,197,94,0.1));
+      animation: correctPulse 0.6s ease-out;
+    }
+
+    .option.incorrect {
+      border-color: var(--error);
+      background: linear-gradient(145deg, rgba(239,68,68,0.15), rgba(239,68,68,0.1));
+      animation: incorrectShake 0.6s ease-out;
+    }
+
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1.02); }
+    }
+
+    @keyframes incorrectShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    .option-text {
+      font-weight: 500;
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+
+    /* Navigation Buttons */
+    .quiz-navigation {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-button {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .quiz-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 20px rgba(22,163,74,0.3);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(22,163,74,0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.8);
+      color: var(--accent-dark);
+      border: 2px solid rgba(22,163,74,0.2);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(255,255,255,0.95);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-start {
+      background: var(--gradient-primary);
+      color: white;
+      font-size: 1.2rem;
+      padding: 20px 40px;
+      margin-top: 20px;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(22,163,74,0.4);
+    }
+
+    /* Results Section */
+    .results-container {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 48px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-intense);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .results-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.05) 0%, transparent 70%);
+      animation: resultsFloat 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes resultsFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+    }
+
+    .score-circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(var(--success) 0deg, var(--success) var(--score-angle, 0deg), rgba(22,163,74,0.1) var(--score-angle, 0deg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      position: relative;
+      animation: scoreReveal 1s ease-out;
+    }
+
+    .score-circle::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      background: var(--gradient-card);
+      backdrop-filter: blur(10px);
+    }
+
+    .score-text {
+      position: relative;
+      z-index: 2;
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes scoreReveal {
+      0% { transform: scale(0) rotate(-180deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .results-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .results-message {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .results-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-item {
+      background: linear-gradient(145deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(22,163,74,0.1);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Start Screen */
+    .start-screen {
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      padding: 48px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-intense);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .start-screen::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22,163,74,0.04) 0%, transparent 70%);
+      animation: startFloat 18s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes startFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(90deg) scale(1.02); }
+    }
+
+    .start-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .start-icon img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 20px rgba(22,163,74,0.3));
+    }
+
+    .start-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .start-description {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .quiz-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .feature-item {
+      background: linear-gradient(145deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,0.1);
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 12px 16px;
+      }
+
+      .sitename {
+        font-size: 1.2rem;
+      }
+
+      .nav a {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+
+      .quiz-container {
+        padding: 0 16px;
+      }
+
+      .quiz-header, .quiz-card, .results-container, .start-screen {
+        padding: 24px;
+      }
+
+      .quiz-title, .start-title {
+        font-size: 1.8rem;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+      }
+
+      .quiz-navigation {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .quiz-button {
+        width: 100%;
+        padding: 14px 24px;
+      }
+
+      .score-circle {
+        width: 150px;
+        height: 150px;
+      }
+
+      .score-text {
+        font-size: 2.5rem;
+      }
+
+      .results-title {
+        font-size: 2rem;
+      }
+
+      .quiz-features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .sitename {
+        display: none;
+      }
+
+      html, body { 
+        font-size: 16px; 
+      }
+
+      .quiz-header, .quiz-card, .results-container, .start-screen {
+        padding: 20px;
+      }
+
+      .results-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .start-icon img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Hidden class for quiz states */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Footer */
+    .site-footer {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(22,163,74,0.1);
+      padding: 32px 24px;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .site-footer .logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .site-footer .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .site-footer .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .site-footer .copy {
+      opacity: 0.95;
+    }
+
+    .site-footer .copy .org {
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .site-footer .copy .copyright {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+  <div class="brand">
+    <a href="index.html" class="logo">
+      <img src="img/logo-KKP.png" alt="Logo SIMANGRO"/>
+    </a>
+    <div class="sitename">SIMANGRO</div>
+  </div>
+
+  <button class="burger-menu" aria-label="Toggle menu" aria-expanded="false">
+    <img src="img/menu-dark.png" alt="Menu" class="menu-icon">
+  </button>
+
+  <nav class="nav" aria-label="Menu utama">
+    <a href="../#about">Beranda</a>
+    <a href="jenis/index.html">Jenis Mangrove</a>
+    <a href="peta sebaran.html">Peta Aksi Mangrove</a>
+    <a href="quiz.html">Quiz</a>
+  </nav>
+</header>
+
+  <div class="quiz-container">
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+      <div class="start-icon">
+        <img src="img/ideas.png" alt="Quiz Icon"/>
+      </div>
+      <h1 class="start-title">Quiz Pengetahuan Mangrove</h1>
+      <p class="start-description">
+        Uji pengetahuan Anda tentang ekosistem mangrove Indonesia! Quiz ini terdiri dari 10 pertanyaan tentang jenis, karakteristik, dan fungsi mangrove.
+      </p>
+      
+      <div class="quiz-features">
+        <div class="feature-item">
+          <span class="feature-icon">❓</span>
+          <div class="feature-title">10 Pertanyaan</div>
+          <div class="feature-desc">Pertanyaan seputar mangrove Indonesia</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <div class="feature-title">Tanpa Batas Waktu</div>
+          <div class="feature-desc">Kerjakan dengan santai dan teliti</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🏆</span>
+          <div class="feature-title">Skor & Pembahasan</div>
+          <div class="feature-desc">Lihat hasil dan penjelasan jawaban</div>
+        </div>
+      </div>
+
+      <button class="quiz-button btn-start" onclick="startQuiz()">
+        Mulai Quiz
+      </button>
+    </div>
+
+    <!-- Quiz Header -->
+    <div class="quiz-header hidden" id="quizHeader">
+      <h1 class="quiz-title">Quiz Pengetahuan Mangrove</h1>
+      <p class="quiz-subtitle">Uji pengetahuan Anda tentang ekosistem mangrove Indonesia</p>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">Pertanyaan 0 dari 10</div>
+    </div>
+
+    <!-- Quiz Questions -->
+    <div id="quizQuestions" class="hidden"></div>
+
+    <!-- Results Section -->
+    <div class="results-container hidden" id="resultsContainer">
+      <div class="score-circle" id="scoreCircle">
+        <span class="score-text" id="scoreText">0%</span>
+      </div>
+      
+      <h2 class="results-title" id="resultsTitle">Selamat!</h2>
+      <p class="results-message" id="resultsMessage">Anda telah menyelesaikan quiz pengetahuan mangrove.</p>
+      
+      <div class="results-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="correctAnswers">0</span>
+          <span class="stat-label">Jawaban Benar</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="incorrectAnswers">0</span>
+          <span class="stat-label">Jawaban Salah</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalQuestions">10</span>
+          <span class="stat-label">Total Pertanyaan</span>
+        </div>
+      </div>
+
+      <button class="quiz-button btn-primary" onclick="restartQuiz()">
+        Ulangi Quiz
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Quiz Data
+    const quizData = [
+      {
+        question: "Apa nama ilmiah dari mangrove bakau hitam?",
+        options: ["Rhizophora mucronata", "Avicennia marina", "Sonneratia alba", "Bruguiera gymnorrhiza"],
+        correct: 0,
+        explanation: "Rhizophora mucronata adalah nama ilmiah untuk mangrove bakau hitam, yang memiliki akar prop yang khas."
+      },
+      {
+        question: "Di zona mana mangrove Avicennia (api-api) biasanya tumbuh?",
+        options: ["Zona terdalam", "Zona tengah", "Zona terluar/terdepan", "Semua zona"],
+        correct: 2,
+        explanation: "Avicennia biasanya tumbuh di zona terluar karena memiliki toleransi tinggi terhadap salinitas dan gelombang."
+      },
+      {
+        question: "Apa fungsi utama pneumatofora pada mangrove?",
+        options: ["Menyerap nutrisi", "Pertukaran gas/pernapasan", "Menyimpan air", "Fotosintesis"],
+        correct: 1,
+        explanation: "Pneumatofora adalah akar napas yang berfungsi untuk pertukaran gas karena tanah mangrove miskin oksigen."
+      },
+      {
+        question: "Peran ekosistem mangrove dalam mitigasi perubahan iklim adalah...",
+        options: ["Menghasilkan ombak besar", "Menyerap karbon dalam jumlah besar", "Meningkatkan salinitas perairan", "Mengubah CO₂ menjadi metana"],
+        correct: 1,
+        explanation: "Mangrove menyimpan karbon biru (blue carbon) dalam tanah dan biomassa, membantu mengurangi gas rumah kaca di atmosfer."
+      },
+      {
+        question: "Berapa persentase kawasan mangrove Indonesia dari total mangrove dunia?",
+        options: ["15%", "23%", "31%", "42%"],
+        correct: 1,
+        explanation: "Indonesia memiliki sekitar 23% dari total kawasan mangrove dunia, menjadikannya negara dengan mangrove terluas."
+      },
+      {
+        question: "Apa yang dimaksud dengan vivipar pada mangrove?",
+        options: ["Berbunga di air", "Benih berkecambah di pohon induk", "Hidup di air asin", "Memiliki akar gantung"],
+        correct: 1,
+        explanation: "Vivipar adalah kemampuan benih mangrove untuk berkecambah saat masih menempel di pohon induk."
+      },
+       {
+        question: "Mangrove sejati berbeda dari mangrove asosiasi karena...",
+        options: ["Hanya tumbuh di air tawar", "Dapat hidup di lingkungan pasang surut dan memiliki adaptasi khusus terhadap salinitas", "Memiliki bunga berwarna mencolok", "Tidak memiliki akar udara"],
+        correct: 1,
+        explanation: "Mangrove sejati hidup di zona pasang surut dan memiliki adaptasi khusus seperti akar napas dan mekanisme penyaringan garam."
+      },
+      {
+        question: "Pada tingkat salinitas berapa mangrove dapat bertahan hidup?",
+        options: ["0-10 ppt", "15-25 ppt", "0-35 ppt", "40-50 ppt"],
+        correct: 2,
+        explanation: "Mangrove dapat bertahan pada salinitas 0-35 ppt, bahkan beberapa spesies toleran hingga 90 ppt."
+      },
+      {
+        question: "Apa nama lain dari Sonneratia alba?",
+        options: ["Perepat", "Bakau", "Api-api", "Pedada"],
+        correct: 0,
+        explanation: "Sonneratia alba dikenal sebagai perepat, dengan bunga putih yang mekar di malam hari."
+      },
+      {
+        question: "Berapa banyak karbon yang dapat diserap mangrove per hektar per tahun?",
+        options: ["1-2 ton", "5-10 ton", "10-15 ton", "20-25 ton"],
+        correct: 1,
+        explanation: "Mangrove dapat menyerap 5-10 ton karbon per hektar per tahun, menjadikannya penyerap karbon yang efektif."
+      }
+    ];
+
+    // Quiz State
+    let currentQuestion = 0;
+    let score = 0;
+    let answers = [];
+    let quizStarted = false;
+
+    // Start Quiz
+    function startQuiz() {
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('quizHeader').classList.remove('hidden');
+      document.getElementById('quizQuestions').classList.remove('hidden');
+      
+      currentQuestion = 0;
+      score = 0;
+      answers = [];
+      quizStarted = true;
+      
+      renderQuestion();
+      updateProgress();
+    }
+
+    // Initialize Quiz
+    function initQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      answers = [];
+      quizStarted = true;
+      
+      document.getElementById('resultsContainer').classList.add('hidden');
+      document.getElementById('quizHeader').classList.remove('hidden');
+      document.getElementById('quizQuestions').classList.remove('hidden');
+      renderQuestion();
+      updateProgress();
+    }
+
+    // Render Current Question
+    function renderQuestion() {
+      const questionData = quizData[currentQuestion];
+      const questionsContainer = document.getElementById('quizQuestions');
+      
+      questionsContainer.innerHTML = `
+        <div class="quiz-card">
+          <div class="question-number">Pertanyaan ${currentQuestion + 1} dari ${quizData.length}</div>
+          <div class="question-text">${questionData.question}</div>
+          
+          <div class="options-container">
+            ${questionData.options.map((option, index) => `
+              <div class="option" onclick="selectOption(${index})" data-option="${index}">
+                <div class="option-text">${option}</div>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="quiz-navigation">
+            <button class="quiz-button btn-secondary" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+              ← Sebelumnya
+            </button>
+            
+            <div style="flex: 1;"></div>
+            
+            <button class="quiz-button btn-primary" id="nextButton" onclick="nextQuestion()" disabled>
+              ${currentQuestion === quizData.length - 1 ? 'Selesai' : 'Selanjutnya →'}
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Restore previous answer if exists
+      if (answers[currentQuestion] !== undefined) {
+        const selectedOption = document.querySelector(`[data-option="${answers[currentQuestion]}"]`);
+        if (selectedOption) {
+          selectedOption.classList.add('selected');
+          document.getElementById('nextButton').disabled = false;
+        }
+      }
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      // Remove previous selections
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      // Mark selected option
+      const selectedOption = document.querySelector(`[data-option="${optionIndex}"]`);
+      selectedOption.classList.add('selected');
+      
+      // Store answer
+      answers[currentQuestion] = optionIndex;
+      
+      // Enable next button
+      document.getElementById('nextButton').disabled = false;
+    }
+
+    // Next Question
+    function nextQuestion() {
+      if (answers[currentQuestion] === undefined) return;
+      
+      // Show correct answer
+      showAnswerFeedback();
+      
+      setTimeout(() => {
+        if (currentQuestion === quizData.length - 1) {
+          showResults();
+        } else {
+          currentQuestion++;
+          renderQuestion();
+          updateProgress();
+        }
+      }, 1500);
+    }
+
+    // Previous Question
+    function previousQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+        updateProgress();
+      }
+    }
+
+    // Show Answer Feedback
+    function showAnswerFeedback() {
+      const questionData = quizData[currentQuestion];
+      const userAnswer = answers[currentQuestion];
+      const correctAnswer = questionData.correct;
+      
+      document.querySelectorAll('.option').forEach((option, index) => {
+        option.style.pointerEvents = 'none';
+        
+        if (index === correctAnswer) {
+          option.classList.add('correct');
+        } else if (index === userAnswer && userAnswer !== correctAnswer) {
+          option.classList.add('incorrect');
+        }
+      });
+      
+      // Update score
+      if (userAnswer === correctAnswer) {
+        score++;
+      }
+    }
+
+    // Update Progress
+    function updateProgress() {
+      const progress = ((currentQuestion + 1) / quizData.length) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressText').textContent = `Pertanyaan ${currentQuestion + 1} dari ${quizData.length}`;
+    }
+
+    // Show Results
+    function showResults() {
+      document.getElementById('quizHeader').classList.add('hidden');
+      document.getElementById('quizQuestions').classList.add('hidden');
+      document.getElementById('resultsContainer').classList.remove('hidden');
+      
+      const percentage = Math.round((score / quizData.length) * 100);
+      const correctCount = score;
+      const incorrectCount = quizData.length - score;
+      
+      // Update score circle
+      const scoreAngle = (percentage / 100) * 360;
+      const scoreCircle = document.getElementById('scoreCircle');
+      scoreCircle.style.setProperty('--score-angle', `${scoreAngle}deg`);
+      
+      // Animate score text
+      animateScore(percentage);
+      
+      // Update results
+      document.getElementById('correctAnswers').textContent = correctCount;
+      document.getElementById('incorrectAnswers').textContent = incorrectCount;
+      document.getElementById('totalQuestions').textContent = quizData.length;
+      
+      // Update title and message based on score
+      const resultsTitle = document.getElementById('resultsTitle');
+      const resultsMessage = document.getElementById('resultsMessage');
+      
+      if (percentage >= 80) {
+        resultsTitle.textContent = 'Luar Biasa!';
+        resultsMessage.textContent = 'Anda memiliki pengetahuan yang sangat baik tentang mangrove! Teruslah belajar dan jaga kelestarian ekosistem mangrove.';
+      } else if (percentage >= 60) {
+        resultsTitle.textContent = 'Bagus!';
+        resultsMessage.textContent = 'Pengetahuan Anda tentang mangrove cukup baik. Masih ada ruang untuk belajar lebih banyak tentang ekosistem penting ini.';
+      } else if (percentage >= 40) {
+        resultsTitle.textContent = 'Cukup!';
+        resultsMessage.textContent = 'Anda sudah memiliki pemahaman dasar tentang mangrove. Cobalah pelajari lebih dalam tentang keanekaragaman dan fungsi mangrove.';
+      } else {
+        resultsTitle.textContent = 'Semangat!';
+        resultsMessage.textContent = 'Jangan berkecil hati! Mari pelajari lebih banyak tentang mangrove Indonesia dan peran pentingnya bagi lingkungan.';
+      }
+    }
+
+    // Animate Score
+    function animateScore(targetPercentage) {
+      const scoreText = document.getElementById('scoreText');
+      let currentScore = 0;
+      const increment = targetPercentage / 30;
+      
+      const timer = setInterval(() => {
+        currentScore += increment;
+        if (currentScore >= targetPercentage) {
+          currentScore = targetPercentage;
+          clearInterval(timer);
+        }
+        scoreText.textContent = `${Math.round(currentScore)}%`;
+      }, 50);
+    }
+
+    // Restart Quiz
+    function restartQuiz() {
+      document.getElementById('resultsContainer').classList.add('hidden');
+      document.getElementById('startScreen').classList.remove('hidden');
+      
+      currentQuestion = 0;
+      score = 0;
+      answers = [];
+      quizStarted = false;
+    }
+
+    // Initialize on page load
+    window.addEventListener('load', () => {
+      // Quiz is ready to start
+      console.log('Quiz mangrove siap dimulai!');
+    });
+  </script>
+
+  <footer class="site-footer" aria-label="Footer organisasi">
+    <div class="footer-content">
+      <div class="logo" aria-hidden="true">
+        <img src="img/logo-KKP.png" alt="Logo KKP"/>
+      </div>
+      <div class="copy">
+        <div class="org">Kementerian Kelautan dan Perikanan</div>
+        <div class="copyright">© Copyright 2025, Kementerian Kelautan dan Perikanan Republik Indonesia</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============ BURGER MENU ============
+    (function() {
+      const burger = document.querySelector('.burger-menu');
+      const nav = document.querySelector('.nav');
+      const links = nav.querySelectorAll('a');
+      let isOpen = false;
+    
+      function toggle() {
+        isOpen = !isOpen;
+        burger.setAttribute('aria-expanded', isOpen);
+        nav.classList.toggle('active', isOpen);
+      }
+    
+      burger.addEventListener('click', toggle);
+    
+      document.addEventListener('click', (e) => {
+        if (isOpen && !nav.contains(e.target) && !burger.contains(e.target)) {
+          toggle();
+        }
+      });
+    
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) toggle();
+      });
+    
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggle();
+        });
+      });
+    
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && isOpen) toggle();
+      });
+    })();
+  </script>
+</body>
+</html>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
+        console.log('ServiceWorker registered:', reg);
+      }).catch(function(err) {
+        console.warn('ServiceWorker registration failed:', err);
+      });
+    });
+  }
+</script>
