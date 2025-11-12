@@ -743,6 +743,12 @@
           weight: 2,
           opacity: 1,
           fillOpacity: 0.5
+        },
+        'pulau': {
+          color: '#64748b',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.5
         }
       };
       return styles[type] || styles.mangrove;
@@ -917,6 +923,19 @@
       });
     }
 
+    function createPulauPopup(feature) {
+      const p = feature.properties || {};
+      let html = `<div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 8px; min-width:220px;">`;
+      html += `<h3 style="margin:0 0 8px 0; color:#16a34a; font-size:15px; font-weight:700;">Pulau Kecil</h3>`;
+      for (let prop in p) {
+        if (p[prop] !== null && p[prop] !== '' && p[prop] !== undefined) {
+          html += `<p style="margin:4px 0; font-size:13px;"><strong>${prop}:</strong> ${p[prop]}</p>`;
+        }
+      }
+      html += `</div>`;
+      return html;
+    }
+
     const layers = [
       {
         url: 'shp/Penanaman_Mangrove_KKP_2020_2024.geojson',
@@ -932,6 +951,11 @@
         url: 'shp/Produk_Turuna_2020_2024.json',
         name: 'Produk Turunan',
         type: 'turunan'
+      },
+      {
+        url: 'shp/Pulau_Kecil_Indonesia_BIG_2024.geojson',
+        name: 'Pulau Kecil',
+        type: 'pulau'
       }
     ];
 
@@ -950,6 +974,8 @@
                   layer.bindPopup(createTurunanPopup(feature));
                 } else if (layerInfo.type === 'prpep') {
                   layer.bindPopup(createPrpepPopup(feature));
+                } else if (layerInfo.type === 'pulau') {
+                  layer.bindPopup(createPulauPopup(feature));
                 } else {
                   layer.bindPopup(createPopupContent(feature, layerInfo.name));
                 }
